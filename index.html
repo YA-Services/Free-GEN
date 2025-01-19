@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="he">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Code For YA Services Free GEN Access</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding-top: 50px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Code For YA Services Free GEN Access</h1>
+    <div id="code-container">
+        <!-- הקוד יופיע כאן -->
+    </div>
+
+    <script>
+        // פונקציה ליצירת קוד ראנדומלי בפורמט XXXX-XXXX-XXXX-XXXX
+        function generateCode() {
+            let code = '';
+            const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+            for (let i = 0; i < 4; i++) {
+                let part = '';
+                for (let j = 0; j < 4; j++) {
+                    part += characters.charAt(Math.floor(Math.random() * characters.length));
+                }
+                if (i < 3) code += part + '-';
+                else code += part;
+            }
+            return code;
+        }
+
+        // בדיקה אם הגולש הגיע מהקישור הנכון
+        function checkReferrer() {
+            const referrer = document.referrer;
+            const validReferrer = "https://loot-link.com/s?EMzbc17L";
+
+            if (referrer !== validReferrer) {
+                document.getElementById("code-container").innerHTML = "You must come from the valid website to get the code.";
+                return false;
+            }
+            return true;
+        }
+
+        // אם הגולש הגיע מהאתר הנכון, ניצור קוד חדש
+        if (checkReferrer()) {
+            const newCode = generateCode();
+            document.getElementById("code-container").innerHTML = "Here is your code: " + newCode;
+
+            // שמירת הקוד בקובץ טקסט (אם הקוד נמצא בשרת)
+            const blob = new Blob([newCode], { type: 'text/plain' });
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(blob);
+            link.download = "generated_code.txt";
+            link.click();
+        }
+    </script>
+</body>
+</html>
